@@ -1,0 +1,94 @@
+h1, h2 {
+	color: white;
+	font-family: Comic Sans MS;
+	text-shadow: -1px 0 #FE5500, 0 1px #FE5500, 1px 0 #FE5500, 0 -1px #FE5500;
+}
+
+p:inline {
+	display: inline;
+}
+
+p:first-of-type {
+	color: black;
+	font-weight: bolder;
+	font-size: 16pt;
+	font-family: monospace;
+	text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+}
+
+p {
+	color: white;
+	font-weight: bolder;
+	font-size: 16pt;
+	font-family: monospace;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+table, td, th {
+border: 5px solid gray ;
+border-collapse: collapse;
+vertical-align: middle;
+text-align: left;
+}
+
+thead > tr:first-of-type {
+	font-family: Arial Black;
+	font-size: 17pt;
+	font-weight: bolder;
+	background-color: white;
+	color: black;
+}
+
+thead > tr:hover {
+	font-family: Arial Black;
+	font-weight: bolder;
+	font-size: 17pt;
+	background-color: black;
+	color: white;
+}
+
+tbody > tr:nth-child(even) {
+	background-color: white;
+	color: black;
+}
+
+tbody > tr:nth-child(odd) {
+	background-color: black;
+	color: white;
+}
+
+tbody > tr:hover:nth-child(even) {
+	background-color: black;
+	color: white;
+	font-weight: bold;
+}
+
+tbody > tr:hover:nth-child(odd) {
+	background-color: white;
+	color: black;
+}
+
+body {
+	background-image: url("space.jpg");
+	background-attachment: fixed;
+	background-size: cover;
+}
+
+a:visited {
+    color: red;
+}
+
+img:hover {
+	position: relative;
+	animation-name: example;
+	animation-duration: 10s;
+	animation-iteration-count: infinite;
+}
+
+@keyframes example {
+    0%   {left:0px; top:0px;}
+    25%  {left:600px; top:0px;}
+    50%  {left:1200px; top:0px;}
+    75%  {left:600px; top:0px;}
+    100% {left:0px; top:0px;}
+}
