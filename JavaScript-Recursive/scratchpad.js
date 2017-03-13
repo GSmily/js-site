@@ -57,7 +57,7 @@ function pelHelper(n) {
 		div.appendChild(p)
     }
 	else {
-		var left = 2 * pelHelper(n - 1);
+		var left = pelHelper(n - 1);
 		var clas = left.html.getAttribute("class");
 		left.html.setAttribute("class", clas + " pel-left");
 		
@@ -65,7 +65,7 @@ function pelHelper(n) {
 		clas = right.html.getAttribute("class");
 		right.html.setAttribute("class", clas + " pel-right");
 
-		value = left.value + right.value;
+		value = left.value + left.value + right.value;
 		var p = document.createElement('p');
 		p.textContent = 'Pel(' + n + ') = ' + value;
 		div.appendChild(p);
@@ -154,6 +154,11 @@ style.textContent =
 	"	float: right;" +
 	"	display: inline-block;" +
 	"	margin-left: 4px;" +
+	"}" +
+	"" +
+	"#pel {" +
+	"	display: inline-block;" +
+	"	width: 20000px;" +
 	"}" +
 	"" +
 	".pel {" +
@@ -249,8 +254,8 @@ var divMakerMaker = function(color, id) {
 	}
 }
 
-var blueDiv = divMakerMaker('blue', 'fib');
-var yellowDiv = divMakerMaker('yellow', 'fib');
+var blueDiv = divMakerMaker('blue', 'pel');
+var yellowDiv = divMakerMaker('yellow', 'tri');
 
 blueDiv();
 yellowDiv();
