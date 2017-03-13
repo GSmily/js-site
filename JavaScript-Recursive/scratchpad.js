@@ -3,7 +3,6 @@ function fibHelper(n) {
 	var div = document.createElement('div');
 	div.setAttribute("class", "fib");
 
-	// leaf nodes aka. base case
 	if (n < 2) {
 		if (n === 0) {
 			value = 0;
@@ -38,7 +37,6 @@ function fibHelper(n) {
 var fib = function (n, node) {
 	var tree = fibHelper(n)
 		node.appendChild(tree.html);
-		//node.style = "display: inline-block;";
 	  node.setAttribute("id", "fib");
 }
 
@@ -87,9 +85,8 @@ var pel = function (n, node) {
 function triHelper(n) {
     var value;
     var div = document.createElement('div');
-    div.setAttribute("class", "trib");
+    div.setAttribute("class", "tri");
 
-        // leaf nodes aka. base case
     if (n < 3) {
             if (n === 0) {
                 value = 0;
@@ -107,19 +104,19 @@ function triHelper(n) {
     else {
             var left = triHelper(n - 1);
             var clas = left.html.getAttribute("class");
-            left.html.setAttribute("class", clas + " trib-left");
+            left.html.setAttribute("class", clas + " tri-left");
 
             var mid = triHelper(n - 2);
             clas = mid.html.getAttribute("class");
-            mid.html.setAttribute("class", clas + " trib-mid");
+            mid.html.setAttribute("class", clas + " tri-mid");
 
             var right = triHelper(n - 3);
             clas = right.html.getAttribute("class");
-            right.html.setAttribute("class", clas + " trib-right");
+            right.html.setAttribute("class", clas + " tri-right");
 
             value = left.value + mid.value + right.value;
             var p = document.createElement('p');
-            p.textContent = 'Trib(' + n + ') = ' + value;
+            p.textContent = 'Tri(' + n + ') = ' + value;
             div.appendChild(p);
 
             div.appendChild(left.html);
@@ -185,6 +182,12 @@ style.textContent =
 	"	margin-right: 4px;" +
 	"}" +
 	"" +
+	".tri-mid {" +
+	"	float: middle;" +
+	"	display: inline-block;" +
+	"	margin-right: 4px;" +
+	"}" +
+	"" +
 	".tri-right {" +
 	"	float: right;" +
 	"	display: inline-block;" +
@@ -246,8 +249,8 @@ var divMakerMaker = function(color, id) {
 	}
 }
 
-var blueDiv = divMakerMaker('blue', 'pel');
-var yellowDiv = divMakerMaker('yellow', 'tri');
+var blueDiv = divMakerMaker('blue', 'fib');
+var yellowDiv = divMakerMaker('yellow', 'fib');
 
 blueDiv();
 yellowDiv();
