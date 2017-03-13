@@ -34,6 +34,7 @@ function fibHelper(n) {
 	}
 	return { 'value': value, 'html': div };
 }
+
 var fib = function (n, node) {
 	var tree = fibHelper(n)
 		node.appendChild(tree.html);
@@ -42,9 +43,41 @@ var fib = function (n, node) {
 }
 
 function pelHelper(n) {
+    var value;
+    var div = document.createElement('div');
+    div.setAttribute("class", "pel")
     
-}
+    if (n < 2) {
+		if (n === 0) {
+			value = 0;
+		} 
+		else if (n === 1) {
+			value = 1;
+		}
+    	var p = document.createElement('p');
+		p.textContent = 'Pel(' + n + ') = ' + value;
+		div.appendChild(p)
+    }
+	else {
+		var left = 2 * pelHelper(n - 1);
+		var clas = left.html.getAttribute("class");
+		left.html.setAttribute("class", clas + " pel-left");
+		
+		var right = pelHelper(n - 2);
+		clas = right.html.getAttribute("class");
+		right.html.setAttribute("class", clas + " pel-right");
 
+		value = left.value + right.value;
+		var p = document.createElement('p');
+		p.textContent = 'Pel(' + n + ') = ' + value;
+		div.appendChild(p);
+
+		div.appendChild(left.html);
+		div.appendChild(right.html);
+	}
+	return { 'value': value, 'html': div };
+}
+    
 var pel = function (n, node) {
     var tree = pelHelper(n)
         node.appendChild(tree.html);
@@ -52,7 +85,49 @@ var pel = function (n, node) {
 }
 
 function triHelper(n) {
-    
+    var value;
+    var div = document.createElement('div');
+    div.setAttribute("class", "trib");
+
+        // leaf nodes aka. base case
+    if (n < 3) {
+            if (n === 0) {
+                value = 0;
+            } 
+            else if (n === 1) {
+                value = 0;
+            }
+            else if (n === 2) {
+                value = 1;
+               }
+            var p = document.createElement('p');
+            p.textContent = 'Tri(' + n + ') = ' + value;
+            div.appendChild(p)
+        }
+    else {
+            var left = triHelper(n - 1);
+            var clas = left.html.getAttribute("class");
+            left.html.setAttribute("class", clas + " trib-left");
+
+            var mid = triHelper(n - 2);
+            clas = mid.html.getAttribute("class");
+            mid.html.setAttribute("class", clas + " trib-mid");
+
+            var right = triHelper(n - 3);
+            clas = right.html.getAttribute("class");
+            right.html.setAttribute("class", clas + " trib-right");
+
+            value = left.value + mid.value + right.value;
+            var p = document.createElement('p');
+            p.textContent = 'Trib(' + n + ') = ' + value;
+            div.appendChild(p);
+
+            div.appendChild(left.html);
+            div.appendChild(mid.html);
+            div.appendChild(right.html);
+        }
+
+    return { 'value': value, 'html': div };
 }
 
 var tri = function (n, node) {
@@ -149,13 +224,7 @@ style.textContent =
 	"	border-color: rgb(0,0,255);" +
 	"	background:   rgb(60,60,180);" +
 	"	box-shadow: 1px 1px 2px rgba(0,0,200,0.4);" +
-	"}" +
-	"" +
-	".green {" +
-	"	border-color: rgb(0,255,0);" +
-	"	background:   rgb(60,180,60);" +
-	"	box-shadow: 1px 1px 2px rgba(0,200,0,0.4);" +
-	"}";
+	"}" ;
 
 document.querySelector('body').appendChild(style);
 
@@ -177,11 +246,11 @@ var divMakerMaker = function(color, id) {
 	}
 }
 
-var blueDiv = divMakerMaker('blue', 'fib');
-var yellowDiv = divMakerMaker('yellow', 'yomama');
+var blueDiv = divMakerMaker('blue', 'pel');
+var yellowDiv = divMakerMaker('yellow', 'tri');
 
 blueDiv();
 yellowDiv();
 
-fib(10, document.querySelector('.blue'))
-fib(11, document.querySelector('.yellow'))
+pel(11, document.querySelector('.blue'))
+tri(11, document.querySelector('.yellow'))
