@@ -35,12 +35,27 @@ function fibHelper(n) {
 }
 
 var fib = function (n, node) {
-	var tree = fibHelper(n)
-		node.appendChild(tree.html);
-	  node.setAttribute("id", "fib");
+	var fibTree = node.querySelector('div.fib')
+	if (fibTree) {
+		node.removeChild(fibTree)
+	}
+	var tree = fibHelper(n);
+	node.appendChild(tree.html);
+	node.setAttribute("id", "fib");
 }
 
+var fibButton = function(me) {
+	var form = me.parentNode;
+	var slider = form.querySelector('input');
+	var value = slider.value;
+	fib(value, form.parentNode);
+}
 
+var fibSlider = function(me) {
+	var form = me.parentNode;
+	var button = form.querySelector('button');
+	button.textContent = 'Fib(' + me.value + ')';
+}
 
 function pelHelper(n) {
     var value;
