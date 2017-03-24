@@ -1,6 +1,7 @@
+
 .fib {
 	display: inline-block;
-	background-color: rgba(112,128,144,0.1);
+	background-color: rgba(0,0,255,0.1);
 }
 
 .fib-left {
@@ -10,6 +11,23 @@
 }
 
 .fib-right {
+	float: right;
+	display: inline-block;
+	margin-left: 4px;
+}
+
+.pel {
+	display: inline-block;
+	background-color: rgba(0,255,0,0.1);
+}
+
+.pel-left {
+	float: left;
+	display: inline-block;
+	margin-right: 4px;
+}
+
+.pel-right {
 	float: right;
 	display: inline-block;
 	margin-left: 4px;

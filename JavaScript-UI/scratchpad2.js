@@ -64,6 +64,8 @@ function pelHelper(n) {
     var div = document.createElement('div');
     div.setAttribute("class", "pel")
     
+    n = parseInt(n);
+    
     if (n < 2) {
 		if (n === 0) {
 			value = 0;
@@ -96,10 +98,28 @@ function pelHelper(n) {
 }
     
 var pel = function (n, node) {
-    var tree = pelHelper(n)
-        node.appendChild(tree.html);
-      node.setAttribute("id", "pel");
+    var pelTree = node.querySelector('div.pel');
+    if (pelTree) {
+    	node.removeChild(pelTree)
+    }
+    var tree = pelHelper(n);
+    node.appendChild(tree.html);
+    node.setAttribute("id", "pel");
 }
+
+var pelButton = function(me) {
+	var form = me.parentNode;
+	var slider = form.querySelector('input');
+	var value = slider.value;
+	pel(value, form.parentNode);
+}
+
+var pelSlider = function(me) {
+	var form = me.parentNode;
+	var button = form.querySelector('button');
+	button.textContent = 'Pel(' + me.value + ')';
+}
+
 
 function triHelper(n) {
     var value;
@@ -147,137 +167,131 @@ function triHelper(n) {
 }
 
 var tri = function (n, node) {
-    var tree = triHelper(n)
-        node.appendChild(tree.html);
-      node.setAttribute("id", "tri");
+    var triTree = node.querySelector('div.tri');
+    if (triTree) {
+    	node.removeChild(triTree);
+    }
+    var tree = triHelper(n);
+    node.appendChild(tree.html);
+    node.setAttribute("id", "tri");
 }
 
-var style = document.createElement('style');
-style.textContent = 
-	"#fib {" +
-	"	display: inline-block;" +
-	"	width: 20000px;" +
-	"}" +
-	"" +
-	".fib {" +
-	"	background-color: rgba(0,0,255,0.1);" +
-	"}" +
-	"" +
-	".fib-left {" +
-	"	float: left;" +
-	"	display: inline-block;" +
-	"	margin-right: 4px;" +
-	"}" +
-	"" +
-	".fib-right {" +
-	"	float: right;" +
-	"	display: inline-block;" +
-	"	margin-left: 4px;" +
-	"}" +
-	"" +
-	"#pel {" +
-	"	display: inline-block;" +
-	"	width: 20000px;" +
-	"}" +
-	"" +
-	".pel {" +
-	"	background-color:rgba(0,255,0,0.1);" +
-	"}" +
-	"" +
-	".pel-left {" +
-	"	float: left;" +
-	"	display: inline-block;" +
-	"	margin-right: 4px;" +
-	"}" +
-	"" +
-	".pel-right {" +
-	"	float: right;" +
-	"	display: inline-block;" +
-	"	margin-left: 4px;" +
-	"}" +
-	"" +
-	".tri {" +
-	"	background-color:rgba(255,0,0,0.1);" +
-	"}" +
-	"" +
-	".tri-left {" +
-	"	float: left;" +
-	"	display: inline-block;" +
-	"	margin-right: 4px;" +
-	"}" +
-	"" +
-	".tri-mid {" +
-	"	float: middle;" +
-	"	display: inline-block;" +
-	"	margin-right: 4px;" +
-	"}" +
-	"" +
-	".tri-right {" +
-	"	float: right;" +
-	"	display: inline-block;" +
-	"	margin-left: 4px;" +
-	"}" +
-	"" +
-	".shadowed {" +
-	"	text-shadow: 1px 1px 2px black;" +
-	"	color:       white;" +
-	"}" +
-	".stuff-box {" +
-	"	font-family: 'helvetica neue', helvetica, sans-serif;" +
-	"	letter-spacing: 1px;" +
-	"	text-transform: capitalize;" +
-	"	text-align: center;" +
-	"	padding: 3px 10px;" +
-	"	margin: 10px;" +
-	"	cursor: pointer;" +
-	"	border-radius: 10px;" +
-	"	border-width: 2px;" +
-	"	border-style: solid;" +
-	"}" +
-	"" +
-	".red {" +
-	"	border-color: rgb(255,0,0);" +
-	"	background:   rgb(180,60,60);" +
-	"	box-shadow: 1px 1px 2px rgba(200,0,0,0.4);" +
-	"}" +
-	"" +
-	".yellow {" +
-	"	border-color: rgb(255,255,0);" +
-	"	background:   rgb(180,180,60);" +
-	"	box-shadow: 1px 1px 2px rgba(200,200,0,0.4);" +
-	"}" +
-	"" +
-	".blue {" +
-	"	border-color: rgb(0,0,255);" +
-	"	background:   rgb(60,60,180);" +
-	"	box-shadow: 1px 1px 2px rgba(0,0,200,0.4);" +
-	"}" ;
+// var style = document.createElement('style');
+// style.textContent = 
+// 	".fib {" +
+// 	"	background-color: rgba(0,0,255,0.1);" +
+// 	"}" +
+// 	"" +
+// 	".fib-left {" +
+// 	"	float: left;" +
+// 	"	display: inline-block;" +
+// 	"	margin-right: 4px;" +
+// 	"}" +
+// 	"" +
+// 	".fib-right {" +
+// 	"	float: right;" +
+// 	"	display: inline-block;" +
+// 	"	margin-left: 4px;" +
+// 	"}" +
+// 	"" +
+// 	".pel {" +
+// 	"	background-color:rgba(0,255,0,0.1);" +
+// 	"}" +
+// 	"" +
+// 	".pel-left {" +
+// 	"	float: left;" +
+// 	"	display: inline-block;" +
+// 	"	margin-right: 4px;" +
+// 	"}" +
+// 	"" +
+// 	".pel-right {" +
+// 	"	float: right;" +
+// 	"	display: inline-block;" +
+// 	"	margin-left: 4px;" +
+// 	"}" +
+// 	"" +
+// 	".tri {" +
+// 	"	background-color:rgba(255,0,0,0.1);" +
+// 	"}" +
+// 	"" +
+// 	".tri-left {" +
+// 	"	float: left;" +
+// 	"	display: inline-block;" +
+// 	"	margin-right: 4px;" +
+// 	"}" +
+// 	"" +
+// 	".tri-mid {" +
+// 	"	float: middle;" +
+// 	"	display: inline-block;" +
+// 	"	margin-right: 4px;" +
+// 	"}" +
+// 	"" +
+// 	".tri-right {" +
+// 	"	float: right;" +
+// 	"	display: inline-block;" +
+// 	"	margin-left: 4px;" +
+// 	"}" +
+// 	"" +
+// 	".shadowed {" +
+// 	"	text-shadow: 1px 1px 2px black;" +
+// 	"	color:       white;" +
+// 	"}" +
+// 	".stuff-box {" +
+// 	"	font-family: 'helvetica neue', helvetica, sans-serif;" +
+// 	"	letter-spacing: 1px;" +
+// 	"	text-transform: capitalize;" +
+// 	"	text-align: center;" +
+// 	"	padding: 3px 10px;" +
+// 	"	margin: 10px;" +
+// 	"	cursor: pointer;" +
+// 	"	border-radius: 10px;" +
+// 	"	border-width: 2px;" +
+// 	"	border-style: solid;" +
+// 	"}" +
+// 	"" +
+// 	".red {" +
+// 	"	border-color: rgb(255,0,0);" +
+// 	"	background:   rgb(180,60,60);" +
+// 	"	box-shadow: 1px 1px 2px rgba(200,0,0,0.4);" +
+// 	"}" +
+// 	"" +
+// 	".yellow {" +
+// 	"	border-color: rgb(255,255,0);" +
+// 	"	background:   rgb(180,180,60);" +
+// 	"	box-shadow: 1px 1px 2px rgba(200,200,0,0.4);" +
+// 	"}" +
+// 	"" +
+// 	".blue {" +
+// 	"	border-color: rgb(0,0,255);" +
+// 	"	background:   rgb(60,60,180);" +
+// 	"	box-shadow: 1px 1px 2px rgba(0,0,200,0.4);" +
+// 	"}" ;
 
-document.querySelector('body').appendChild(style);
+// document.querySelector('body').appendChild(style);
 
-( function(color, id) {
-	var div = document.createElement('div');
-	div.setAttribute('class', color + ' shadowed stuff-box');
-	div.setAttribute('id', id);
-	document.body.appendChild(div);
-}('red', 'fib'));
+// ( function(color, id) {
+// 	var div = document.createElement('div');
+// 	div.setAttribute('class', color + ' shadowed stuff-box');
+// 	div.setAttribute('id', id);
+// 	document.body.appendChild(div);
+// }('red', 'fib'));
 
-fib(11, document.querySelector('.red'))
+// fib(11, document.querySelector('.red'))
 
-var divMakerMaker = function(color, id) {
-	return function() {
-		var div = document.createElement('div');
-		div.setAttribute('class', color + ' shadowed stuff-box');
-		div.setAttribute('id', id);
-		document.body.appendChild(div);
-	}
-}
+// var divMakerMaker = function(color, id) {
+// 	return function() {
+// 		var div = document.createElement('div');
+// 		div.setAttribute('class', color + ' shadowed stuff-box');
+// 		div.setAttribute('id', id);
+// 		document.body.appendChild(div);
+// 	}
+// }
 
-var blueDiv = divMakerMaker('blue', 'pel');
-var yellowDiv = divMakerMaker('yellow', 'tri');
+// var blueDiv = divMakerMaker('blue', 'pel');
+// var yellowDiv = divMakerMaker('yellow', 'tri');
 
-blueDiv();
-yellowDiv();
+// blueDiv();
+// yellowDiv();
 
-pel(11, document.querySelector('.blue'))
-tri(11, document.querySelector('.yellow'))
+// pel(11, document.querySelector('.blue'))
+// tri(11, document.querySelector('.yellow'))
