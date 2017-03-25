@@ -125,6 +125,8 @@ function triHelper(n) {
     var value;
     var div = document.createElement('div');
     div.setAttribute("class", "tri");
+    
+    n = parseInt(n);
 
     if (n < 3) {
             if (n === 0) {
@@ -173,7 +175,20 @@ var tri = function (n, node) {
     }
     var tree = triHelper(n);
     node.appendChild(tree.html);
-    node.setAttribute("id", "tri");
+    // node.setAttribute("id", "tri");
+}
+
+var triButton = function(me) {
+	var form = me.parentNode;
+	var slider = form.querySelector('input');
+	var value = slider.value;
+	tri(value, form.parentNode);
+}
+
+var triSlider = function(me) {
+	var form = me.parentNode;
+	var button = form.querySelector('button');
+	button.textContent = 'Tri(' + me.value + ')';
 }
 
 // var style = document.createElement('style');

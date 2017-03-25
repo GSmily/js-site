@@ -33,6 +33,29 @@
 	margin-left: 4px;
 }
 
+.tri {
+	display: inline-block;
+	background-color: rgba(255,0,0,0.1);
+}
+
+.tri-left {
+	float: left;
+	display: inline-block;
+	margin-right: 4px;
+}
+
+.tri-mid {
+	float: middle;
+	display: inline-block;
+	margin-right: 4px;
+}
+
+.tri-right {
+	float: right;
+	display: inline-block;
+	margin-left: 4px;
+}
+
 .shadowed {
 	text-shadow: 1px 1px 2px black;
 	color:       white;
